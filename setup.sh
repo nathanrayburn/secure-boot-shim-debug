@@ -1,4 +1,4 @@
-#!/bin/bash
+$#!/bin/bash
 set -euo pipefail
 
 cd "$(dirname "$0")"  # Ensure we're running from the script's directory
@@ -50,7 +50,7 @@ export PYTHON_COMMAND=python3
 source edksetup.sh
 make -C BaseTools
 build -a X64 -t GCC5 -b DEBUG -p OvmfPkg/OvmfPkgX64.dsc
-OVMF_FD="${EDK2_DIR}/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd"
+
 cd "${ROOT_DIR}"
 
 # Clone and build efitools
@@ -119,5 +119,23 @@ mkfs.vfat "${IMG}"
 mcopy -i "${IMG}" -s iso/* ::/
 
 echo "[✓] Secure Boot environment built successfully."
-echo "    OVMF firmware: ${OVMF_FD}"
 echo "    FAT image:     ${IMG}"
+
+echo "[*] Exporting OVMF firmware files..."
+OVMF_OUTPUT_DIR="${ROOT_DIR}/ovmf"
+rm -rf "${OVMF_OUTPUT_DIR}"
+mkdir -p "${OVMF_OUTPUT_DIR}"
+
+if [[ -f "${OVMF_CODE_FD}" ]]; then
+    cp "${OVMF_CODE_FD}" "${OVMF_OUTPUT_DIR}/OVMF_CODE.fd"
+else
+    echo "[!] Error: OVMF_CODE.fd not found."
+fi
+
+if [[ -f "${OVMF_VARS_FD}" ]]; then
+    cp "${OVMF_VARS_FD}" "${OVMF_OUTPUT_DIR}/OVMF_VARS.fd"
+else
+    echo "[!] Warning: OVMF_VARS.fd not found."
+fi
+
+echo "[✓] Firmware files copied to ${OVMF_OUTPUT_DIR}/"
