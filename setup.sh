@@ -45,9 +45,11 @@ git submodule update --init --recursive
 echo "[*] Applying patched OvmfPkgX64.dsc..."
 cp "${PATCHED_DSC}" "${EDK2_DIR}/OvmfPkg/OvmfPkgX64.dsc"
 
-# Fix for PYTHON_COMMAND
 export PYTHON_COMMAND=python3
+# Temporarily disable 'nounset' to allow unbound vars in edksetup.sh
+set +u
 source edksetup.sh
+set -u
 make -C BaseTools
 build -a X64 -t GCC5 -b DEBUG -p OvmfPkg/OvmfPkgX64.dsc
 
@@ -97,13 +99,7 @@ cd "${GRUB_DIR}"
 ./configure --with-platform=efi --target=x86_64 --disable-werror --enable-sbat
 make -j$(nproc)
 
-# Create SBAT metadata
-cat <<EOF > sbat.csv
-sbat,1,SBAT Version,https://github.com/rhboot/shim/blob/main/SBAT.md
-bootloader.nathan,1,HEIG,bootloader.nathan,1,https://heig.ch/
-EOF
-
-./grub-mkimage --directory=./grub-core --sbat=sbat.csv \
+./grub-mkimage --directory=./grub-core --sbat=../sbat.csv \
   -O x86_64-efi -o ../grubx64.efi -p /EFI/boot part_gpt fat ext2 normal linux configfile search echo
 
 cd "${ROOT_DIR}"
