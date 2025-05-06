@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+cd "$(dirname "$0")"  # Ensure we're running from the script's directory
 ROOT_DIR=$(pwd)
 
 # Paths
@@ -32,7 +33,6 @@ make update
 
 echo "[*] Applying patched shim.c..."
 cp "${PATCHED_SHIM}" "${SHIM_DIR}/shim.c"
-
 make clean
 cd "${ROOT_DIR}"
 
@@ -42,29 +42,29 @@ git clone https://github.com/tianocore/edk2.git "${EDK2_DIR}"
 cd "${EDK2_DIR}"
 git submodule update --init --recursive
 
-echo "[*] Applying patched OvmfPkgX64.dsc with Secure Boot enabled..."
+echo "[*] Applying patched OvmfPkgX64.dsc..."
 cp "${PATCHED_DSC}" "${EDK2_DIR}/OvmfPkg/OvmfPkgX64.dsc"
 
-# Build OVMF with Secure Boot enabled
+# Fix for PYTHON_COMMAND
+export PYTHON_COMMAND=python3
 source edksetup.sh
 make -C BaseTools
 build -a X64 -t GCC5 -b DEBUG -p OvmfPkg/OvmfPkgX64.dsc
 OVMF_FD="${EDK2_DIR}/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd"
 cd "${ROOT_DIR}"
 
-# Build efitools and generate Secure Boot keys
+# Clone and build efitools
 git clone https://git.kernel.org/pub/scm/linux/kernel/git/jejb/efitools.git "${EFITOOLS_DIR}"
 cd "${EFITOOLS_DIR}"
 make
 
+# Generate Secure Boot keys
 mkdir -p "${KEYS_DIR}"
 cd "${KEYS_DIR}"
 
-# Generate Secure Boot keys and certs
 openssl req -new -x509 -newkey rsa:2048 -keyout PK.key -out PK.crt -days 3650 -nodes -subj "/CN=Platform Key/"
 openssl req -new -x509 -newkey rsa:2048 -keyout KEK.key -out KEK.crt -days 3650 -nodes -subj "/CN=Key Exchange Key/"
 openssl req -new -x509 -newkey rsa:2048 -keyout DB.key -out DB.crt -days 3650 -nodes -subj "/CN=DB Key/"
-
 openssl x509 -req -in <(openssl x509 -in KEK.crt -x509toreq -signkey KEK.key) -CA PK.crt -CAkey PK.key -CAcreateserial -out KEK.crt -days 3650
 openssl x509 -req -in <(openssl x509 -in DB.crt -x509toreq -signkey DB.key) -CA KEK.crt -CAkey KEK.key -CAcreateserial -out DB.crt -days 3650
 
@@ -89,8 +89,8 @@ cd "${ROOT_DIR}"
 sbsign --key "${KEYS_DIR}/DB.key" --cert "${KEYS_DIR}/DB.crt" \
   --output shimx64-signed.efi "${SHIM_DIR}/shimx64.efi"
 
-# Clone and build GRUB from your GitHub fork
-echo "[*] Cloning GRUB from GitHub fork with stable gnulib..."
+# Clone and build GRUB (make sure your fork uses gnulib_url=https://github.com/nathanrayburn/gnulib.git)
+echo "[*] Cloning GRUB from GitHub fork..."
 git clone https://github.com/nathanrayburn/grub.git "${GRUB_DIR}"
 cd "${GRUB_DIR}"
 ./bootstrap
