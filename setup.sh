@@ -54,7 +54,8 @@ make -C BaseTools
 build -a X64 -t GCC5 -b DEBUG -p OvmfPkg/OvmfPkgX64.dsc
 
 cd "${ROOT_DIR}"
-
+OVMF_CODE_FD="${EDK2_DIR}/Build/OvmfX64/DEBUG_GCC5/FV/OVMF_CODE.fd"
+OVMF_VARS_FD="${EDK2_DIR}/Build/OvmfX64/DEBUG_GCC5/FV/OVMF_VARS.fd"
 # Clone and build efitools
 git clone https://git.kernel.org/pub/scm/linux/kernel/git/jejb/efitools.git "${EFITOOLS_DIR}"
 cd "${EFITOOLS_DIR}"

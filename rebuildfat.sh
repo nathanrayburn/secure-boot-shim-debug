@@ -7,9 +7,9 @@ mkdir -p iso/EFI/Boot
 
 echo "[*] Copying binaries..."
 
-cp shimx64-signed.efi iso/EFI/Boot/BOOTX64.efi
+#cp shimx64-signed.efi iso/EFI/Boot/BOOTX64.efi
 cp grubx64-signed.efi iso/EFI/Boot/grubx64.efi
-#cp efitools/KeyTool.efi iso/EFI/Boot/BOOTX64.efi
+cp efitools/KeyTool.efi iso/EFI/Boot/BOOTX64.efi
 
 echo "[*] Copying Secure Boot keys (.der)..."
 
