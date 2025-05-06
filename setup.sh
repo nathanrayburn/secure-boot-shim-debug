@@ -103,7 +103,7 @@ sbat,1,SBAT Version,https://github.com/rhboot/shim/blob/main/SBAT.md
 bootloader.nathan,1,HEIG,bootloader.nathan,1,https://heig.ch/
 EOF
 
-./grub-mkimage --directory=./grub-core --sbat=../sbat.csv \
+./grub-mkimage --directory=./grub-core --sbat=sbat.csv \
   -O x86_64-efi -o ../grubx64.efi -p /EFI/boot part_gpt fat ext2 normal linux configfile search echo
 
 cd "${ROOT_DIR}"
