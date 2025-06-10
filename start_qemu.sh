@@ -1,5 +1,11 @@
 qemu-system-x86_64 \
   -m 2048 \
   -drive if=pflash,format=raw,readonly=on,file=ovmf/OVMF_CODE.fd \
-  -drive if=pflash,format=raw,file=ovmf/OVMF_VARS.fd \
-  -drive file=fat.img,format=raw -s -serial mon:stdio -nographic
+  -drive if=pflash,format=raw,file=Build/OvmfX64/DEBUG_GCC5/FV/OVMF_VARS.fd \
+  -drive id=nvme_disk,file=fat.img,format=raw,if=none \
+  -device nvme,serial=deadbeef,drive=nvme_disk \
+  -s \
+  -serial mon:stdio \
+  -nographic \
+  -debugcon file:debug.log \
+  -global isa-debugcon.iobase=0x402
