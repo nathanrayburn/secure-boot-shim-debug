@@ -30,6 +30,7 @@ rm -rf "${SHIM_DIR}" "${EDK2_DIR}" "${EDK2PLATFORM_DIR}" "${EFITOOLS_DIR}" "${KE
 echo "[*] Cloning Shim..."
 git clone https://github.com/rhboot/shim.git "${SHIM_DIR}"
 cd "${SHIM_DIR}"
+git checkout 18d98bfb34be583a5fe2987542e4b15e0db9cb61
 make update
 
 echo "[*] Applying patched shim.c..."
@@ -43,7 +44,7 @@ git clone https://github.com/tianocore/edk2.git "${EDK2_DIR}"
 git clone https://github.com/tianocore/edk2-platforms.git "${ROOT_DIR}/edk2-platforms"
 
 cd "${EDK2_DIR}"
-git checkout edk2-stable202505
+git checkout edk2-stable202502
 git submodule update --init --recursive
 
 echo "[*] Applying patched OvmfPkgX64.dsc..."
