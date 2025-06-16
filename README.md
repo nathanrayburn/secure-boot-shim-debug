@@ -18,7 +18,7 @@ Install all required packages with:
 ```bash
 sudo apt update
 sudo apt install \
-  build-essential gcc g++ make pkg-config autoconf automake libtool m4 bison flex git \
+  build-essential gcc g++ make pkg-config autoconf automake libtool m4 bison flex git iasl \
   uuid-dev nasm qemu-system-x86 \
   sbsigntool efitools openssl libssl-dev \
   mtools dosfstools \
