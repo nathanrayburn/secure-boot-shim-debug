@@ -7,6 +7,7 @@ ROOT_DIR=$(pwd)
 # Paths
 SHIM_DIR="${ROOT_DIR}/shim"
 EDK2_DIR="${ROOT_DIR}/edk2"
+EDK2PLATFORM_DIR="${ROOT_DIR}/edk2-platforms"
 EFITOOLS_DIR="${ROOT_DIR}/efitools"
 KEYS_DIR="${ROOT_DIR}/keys"
 GRUB_DIR="${ROOT_DIR}/grub"
@@ -23,7 +24,7 @@ if [[ ! -f "${PATCHED_SHIM}" || ! -f "${PATCHED_DSC}" ]]; then
 fi
 
 echo "[*] Cleaning old artifacts..."
-rm -rf "${SHIM_DIR}" "${EDK2_DIR}" "${EFITOOLS_DIR}" "${KEYS_DIR}" "${GRUB_DIR}" "${ISO_DIR}" "${IMG}" *.auth *.esl *.crt *.key *.cer shimx64* grubx64*
+rm -rf "${SHIM_DIR}" "${EDK2_DIR}" "${EDK2PLATFORM_DIR}" "${EFITOOLS_DIR}" "${KEYS_DIR}" "${GRUB_DIR}" "${ISO_DIR}" "${IMG}" *.auth *.esl *.crt *.key *.cer shimx64* grubx64*
 
 # Clone shim and apply patched shim.c
 echo "[*] Cloning Shim..."
