@@ -48,7 +48,7 @@ echo "[*] Applying patched OvmfPkgX64.dsc..."
 cp "${PATCHED_DSC}" "${EDK2_DIR}/OvmfPkg/OvmfPkgX64.dsc"
 
 cd "${EDK2PLATFORM_DIR}"
-cp Silicon "${EDK2_DIR}"
+cp -r Silicon "${EDK2_DIR}"
 cd "${EDK2_DIR}"
 
 export PYTHON_COMMAND=python3
