@@ -149,7 +149,6 @@
 !include MdePkg/MdeLibs.dsc.inc
 
 [LibraryClasses]
-  #MemDebugLogLib|MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
   SmmRelocationLib|OvmfPkg/Library/SmmRelocationLib/SmmRelocationLib.inf
   PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
   TimerLib|OvmfPkg/Library/AcpiTimerLib/BaseAcpiTimerLib.inf
@@ -512,7 +511,6 @@
 !endif
 
 [PcdsFixedAtBuild]
-  gIntelSiliconPkgTokenSpaceGuid.PcdVTdPolicyPropertyMask|0x3
   gEfiMdeModulePkgTokenSpaceGuid.PcdStatusCodeMemorySize|1
 !if $(SMM_REQUIRE) == FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdResetOnMemoryTypeInformationChange|FALSE
@@ -708,7 +706,7 @@
 ################################################################################
 [Components]
   OvmfPkg/ResetVector/ResetVector.inf
-  #IntelSiliconPkg/Feature/VTd/IntelVTdDxe/IntelVTdDxe.inf
+
   #
   # SEC Phase modules
   #
