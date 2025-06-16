@@ -39,12 +39,15 @@ cd "${ROOT_DIR}"
 # Clone EDK2 and apply patched OvmfPkgX64.dsc
 echo "[*] Cloning EDK2..."
 git clone https://github.com/tianocore/edk2.git "${EDK2_DIR}"
+git clone https://github.com/tianocore/edk2-platforms.git "${ROOT_DIR}/edk2-platforms"
+
 cd "${EDK2_DIR}"
 git submodule update --init --recursive
 
 echo "[*] Applying patched OvmfPkgX64.dsc..."
 cp "${PATCHED_DSC}" "${EDK2_DIR}/OvmfPkg/OvmfPkgX64.dsc"
 
+export PACKAGES_PATH="${EDK2_DIR}:${ROOT_DIR}/edk2-platforms/Silicon/Intel"
 export PYTHON_COMMAND=python3
 # Temporarily disable 'nounset' to allow unbound vars in edksetup.sh
 set +u
