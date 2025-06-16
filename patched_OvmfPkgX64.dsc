@@ -149,6 +149,7 @@
 !include MdePkg/MdeLibs.dsc.inc
 
 [LibraryClasses]
+  IntelVTdPeiDxeLib|IntelSiliconPkg/Feature/VTd/IntelVTdCoreDxe/IntelVTdPeiDxeLib.inf
   SmmRelocationLib|OvmfPkg/Library/SmmRelocationLib/SmmRelocationLib.inf
   PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
   TimerLib|OvmfPkg/Library/AcpiTimerLib/BaseAcpiTimerLib.inf
@@ -707,6 +708,7 @@
 ################################################################################
 [Components]
   OvmfPkg/ResetVector/ResetVector.inf
+  IntelSiliconPkg/Feature/VTd/IntelVTdCoreDxe/IntelVTdPeiDxeLib.inf
   IntelSiliconPkg/Feature/VTd/IntelVTdCorePei/IntelVTdCorePei.inf
   IntelSiliconPkg/Feature/VTd/IntelVTdCoreDxe/IntelVTdCoreDxe.inf
   IntelSiliconPkg/Feature/VTd/IntelVTdDmarPei/IntelVTdDmarPei.inf
