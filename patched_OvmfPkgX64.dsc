@@ -149,7 +149,7 @@
 !include MdePkg/MdeLibs.dsc.inc
 
 [LibraryClasses]
-  MemDebugLogLib|MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
+  #MemDebugLogLib|MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
   SmmRelocationLib|OvmfPkg/Library/SmmRelocationLib/SmmRelocationLib.inf
   PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
   TimerLib|OvmfPkg/Library/AcpiTimerLib/BaseAcpiTimerLib.inf
@@ -708,7 +708,7 @@
 ################################################################################
 [Components]
   OvmfPkg/ResetVector/ResetVector.inf
-  IntelSiliconPkg/Feature/VTd/IntelVTdDxe/IntelVTdDxe.inf
+  #IntelSiliconPkg/Feature/VTd/IntelVTdDxe/IntelVTdDxe.inf
   #
   # SEC Phase modules
   #
