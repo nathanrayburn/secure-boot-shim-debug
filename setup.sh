@@ -44,7 +44,7 @@ git clone https://github.com/tianocore/edk2.git "${EDK2_DIR}"
 git clone https://github.com/tianocore/edk2-platforms.git "${ROOT_DIR}/edk2-platforms"
 
 cd "${EDK2_DIR}"
-git checkout edk2-stable202502
+git checkout 28653a1c8a0c42bd598ba2677fc1b84fbb4e9c37
 git submodule update --init --recursive
 
 echo "[*] Applying patched OvmfPkgX64.dsc..."
