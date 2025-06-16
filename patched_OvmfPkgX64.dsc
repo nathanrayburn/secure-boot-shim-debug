@@ -490,6 +490,7 @@
 #
 ################################################################################
 [PcdsFeatureFlag]
+  gIntelSiliconPkgTokenSpaceGuid.PcdVTdEnable|TRUE
   gEfiMdeModulePkgTokenSpaceGuid.PcdHiiOsRuntimeSupport|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplSupportUefiDecompress|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplSwitchToLongMode|FALSE
@@ -706,7 +707,13 @@
 ################################################################################
 [Components]
   OvmfPkg/ResetVector/ResetVector.inf
-
+  IntelSiliconPkg/Feature/VTd/IntelVTdCorePei/IntelVTdCorePei.inf
+  IntelSiliconPkg/Feature/VTd/IntelVTdCoreDxe/IntelVTdCoreDxe.inf
+  IntelSiliconPkg/Feature/VTd/IntelVTdDmarPei/IntelVTdDmarPei.inf
+  IntelSiliconPkg/Feature/VTd/IntelVTdDxe/IntelVTdDxe.inf
+  IntelSiliconPkg/Feature/VTd/IntelVTdPmrPei/IntelVTdPmrPei.inf
+  IntelSiliconPkg/Feature/VTd/PlatformVTdInfoSamplePei/PlatformVTdInfoSamplePei.inf
+  IntelSiliconPkg/Feature/VTd/PlatformVTdSampleDxe/PlatformVTdSampleDxe.inf
   #
   # SEC Phase modules
   #
