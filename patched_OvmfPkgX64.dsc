@@ -706,7 +706,7 @@
 ################################################################################
 [Components]
   OvmfPkg/ResetVector/ResetVector.inf
-
+  Silicon/Intel/IntelSiliconPkg/Feature/VTd/IntelVTdDxe/IntelVTdDxe.inf
   #
   # SEC Phase modules
   #

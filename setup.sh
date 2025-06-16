@@ -7,6 +7,7 @@ ROOT_DIR=$(pwd)
 # Paths
 SHIM_DIR="${ROOT_DIR}/shim"
 EDK2_DIR="${ROOT_DIR}/edk2"
+EDK2PLATFORM_DIR="${ROOT_DIR}/edk2-platforms"
 EFITOOLS_DIR="${ROOT_DIR}/efitools"
 KEYS_DIR="${ROOT_DIR}/keys"
 GRUB_DIR="${ROOT_DIR}/grub"
@@ -23,7 +24,7 @@ if [[ ! -f "${PATCHED_SHIM}" || ! -f "${PATCHED_DSC}" ]]; then
 fi
 
 echo "[*] Cleaning old artifacts..."
-rm -rf "${SHIM_DIR}" "${EDK2_DIR}" "${EFITOOLS_DIR}" "${KEYS_DIR}" "${GRUB_DIR}" "${ISO_DIR}" "${IMG}" *.auth *.esl *.crt *.key *.cer shimx64* grubx64*
+rm -rf "${SHIM_DIR}" "${EDK2_DIR}" "${EDK2PLATFORM_DIR}" "${EFITOOLS_DIR}" "${KEYS_DIR}" "${GRUB_DIR}" "${ISO_DIR}" "${IMG}" *.auth *.esl *.crt *.key *.cer shimx64* grubx64*
 
 # Clone shim and apply patched shim.c
 echo "[*] Cloning Shim..."
@@ -39,11 +40,16 @@ cd "${ROOT_DIR}"
 # Clone EDK2 and apply patched OvmfPkgX64.dsc
 echo "[*] Cloning EDK2..."
 git clone https://github.com/tianocore/edk2.git "${EDK2_DIR}"
+git clone https://github.com/tianocore/edk2-platforms.git "${EDK2PLATFORM_DIR}"
 cd "${EDK2_DIR}"
 git submodule update --init --recursive
 
 echo "[*] Applying patched OvmfPkgX64.dsc..."
 cp "${PATCHED_DSC}" "${EDK2_DIR}/OvmfPkg/OvmfPkgX64.dsc"
+
+cd "${EDK2PLATFORM_DIR}"
+cp Silicon "${EDK2_DIR}"
+cd "${EDK2_DIR}"
 
 export PYTHON_COMMAND=python3
 # Temporarily disable 'nounset' to allow unbound vars in edksetup.sh
