@@ -491,7 +491,7 @@
 #
 ################################################################################
 [PcdsFeatureFlag]
-  gIntelSiliconPkgTokenSpaceGuid.PcdVTdEnable|TRUE
+  #gIntelSiliconPkgTokenSpaceGuid.PcdVTdEnable|TRUE
   gEfiMdeModulePkgTokenSpaceGuid.PcdHiiOsRuntimeSupport|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplSupportUefiDecompress|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplSwitchToLongMode|FALSE
