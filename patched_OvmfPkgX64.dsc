@@ -707,7 +707,6 @@
 ################################################################################
 [Components]
   OvmfPkg/ResetVector/ResetVector.inf
-  IntelSiliconPkg/Feature/VTd/IntelVTdCoreDxe/IntelVTdPeiDxeLib.inf
   IntelSiliconPkg/Feature/VTd/IntelVTdCorePei/IntelVTdCorePei.inf
   IntelSiliconPkg/Feature/VTd/IntelVTdCoreDxe/IntelVTdCoreDxe.inf
   IntelSiliconPkg/Feature/VTd/IntelVTdDmarPei/IntelVTdDmarPei.inf
