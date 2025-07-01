@@ -3,11 +3,13 @@ import gdb
 # === USER CONFIG ===
 
 der_path = "/Volumes/data/uefi_build/empty-env 2/env/keys/grub.der"
-match_length = 16                
+#der_path ="/Volumes/data/uefi_build/empty-env/env/mal_grub.pkcs7"
+#der_path ="/Volumes/data/uefi_build/empty-env/env/mal_grub.der"
+match_length = 797             
 
 start = 0x00000000                
 end = 0x7E800000
-chunk_size = 0x1000                  # 4KB chunks
+chunk_size = 0x100000                  # 4KB chunks
 
 # === LOAD DER FILE ===
 
