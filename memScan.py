@@ -2,14 +2,14 @@ import gdb
 
 # === USER CONFIG ===
 
-der_path = "/Volumes/data/uefi_build/empty-env 2/env/keys/grub.der"
-#der_path ="/Volumes/data/uefi_build/empty-env/env/mal_grub.pkcs7"
+#der_path = "keys/grub.der"
+der_path ="debian/shim/debian-shim-embedded-grub.der"
 #der_path ="/Volumes/data/uefi_build/empty-env/env/mal_grub.der"
-match_length = 797             
+match_length = 930            
 
-start = 0x00000000                
+start = 0x70000000                
 end = 0x7E800000
-chunk_size = 0x100000                  # 4KB chunks
+chunk_size = 0x1000                  # 4KB chunks
 
 # === LOAD DER FILE ===
 
@@ -21,7 +21,7 @@ if len(der_bytes) < match_length:
     raise SystemExit
 
 pattern = der_bytes[:match_length]
-print(f"[+] Loaded DER file, using first {match_length} bytes for matching:")
+print(f"[+] Loaded {der_path} file, using first {match_length} bytes for matching:")
 print(' '.join(f'{b:02x}' for b in pattern))
 
 # === SCANNER ===
