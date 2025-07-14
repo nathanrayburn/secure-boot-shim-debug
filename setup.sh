@@ -103,6 +103,7 @@ sbsign --key "${KEYS_DIR}/DB.key" --cert "${KEYS_DIR}/DB.crt" \
 # Clone and build GRUB (make sure your fork uses gnulib_url=https://github.com/nathanrayburn/gnulib.git)
 echo "[*] Cloning GRUB from GitHub fork..."
 git clone https://github.com/nathanrayburn/grub.git "${GRUB_DIR}"
+cp main.c "${GRUB_DIR}/grub-core/normal"
 cd "${GRUB_DIR}"
 ./bootstrap
 ./configure --with-platform=efi --target=x86_64 --disable-werror --enable-sbat
